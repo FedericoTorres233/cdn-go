@@ -12,11 +12,7 @@ const port = 3000
 func main() {
 	app := fiber.New()
 
-	// Handle file uploads
-	app.Post("/upload", handlers.UploadHandler)
-
-	// Serve uploaded images
-	app.Get("/image/:dir/:filename", handlers.GetImageHandler)
+	handlers.SetupHandlers(app)
 
 	// Start the server
 	fmt.Printf("Server is running on http://localhost:%d\n", port)

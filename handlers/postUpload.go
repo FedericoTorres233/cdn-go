@@ -13,7 +13,7 @@ import (
 
 const uploadDir = "./uploads/"
 
-func UploadHandler(c fiber.Ctx) error {
+func uploadHandler(c fiber.Ctx) error {
 	// Parse the form data, including files
 	form, err := c.MultipartForm()
 	if err != nil {

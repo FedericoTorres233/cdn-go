@@ -6,7 +6,7 @@ import (
 	"github.com/gofiber/fiber/v3"
 )
 
-func GetImageHandler(c fiber.Ctx) error {
+func getImageHandler(c fiber.Ctx) error {
 	// Get the filename parameter from the URL
 	filename := c.Params("filename")
 	dir := c.Params("dir")
