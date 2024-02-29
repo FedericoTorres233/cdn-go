@@ -1,5 +1,5 @@
 build:
-	go build -o bin/cdn
+	go build -o bin/cdn cmd/cdn-fiber/main.go
 
 run: build
 	./bin/cdn

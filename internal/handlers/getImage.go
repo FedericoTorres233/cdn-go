@@ -16,7 +16,7 @@ func getImageHandler(c fiber.Ctx) error {
 
 	// Check if the file exists
 	if _, err := os.Stat(filepath); os.IsNotExist(err) {
-    return c.SendFile("./images/dummy.png")
+    return c.SendFile("/images/dummy.png")
     //return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Image not found"})
 	}
 

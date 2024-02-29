@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/federicotorres233/cdn-fiber/handlers"
+	"github.com/federicotorres233/cdn-fiber/internal/handlers"
 	"github.com/gofiber/fiber/v3"
 )
 

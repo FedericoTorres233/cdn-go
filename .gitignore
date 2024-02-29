@@ -3,4 +3,4 @@ replit.nix
 .env
 /images
 /bin
-/uploads
+/public

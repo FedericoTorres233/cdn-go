@@ -6,12 +6,12 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/federicotorres233/cdn-fiber/types"
-	"github.com/federicotorres233/cdn-fiber/utils"
+	"github.com/federicotorres233/cdn-fiber/internal/types"
+	"github.com/federicotorres233/cdn-fiber/internal/utils"
 	"github.com/gofiber/fiber/v3"
 )
 
-const uploadDir = "./uploads/"
+const uploadDir = "./public/uploads/"
 
 func uploadHandler(c fiber.Ctx) error {
 	// Parse the form data, including files
