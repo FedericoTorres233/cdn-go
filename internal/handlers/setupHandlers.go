@@ -4,11 +4,10 @@ import (
 	"github.com/gofiber/fiber/v3"
 )
 
-func SetupHandlers(app *fiber.App){
-  // Handle file uploads
-  app.Post("/upload", uploadHandler)
+func SetupHandlers(app *fiber.App) {
+	// Handle file uploads
+	app.Post("/upload", uploadHandler)
 
-  // Serve uploaded images
-  app.Get("/image/:dir/:filename", getImageHandler)
+	// Serve uploaded images
+	app.Get("/image/:dir/:filename", getImageHandler)
 }
-
