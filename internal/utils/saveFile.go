@@ -6,13 +6,17 @@ import (
 	"os"
 )
 
+// SaveFile saves a file to disk and name it to a certain filename
 func SaveFile(file *multipart.FileHeader, filename string) error {
-	src, err := file.Open()
+
+  // Open file
+  src, err := file.Open()
 	if err != nil {
 		return err
 	}
 	defer src.Close()
-
+  
+  // Create file on disk
 	dst, err := os.Create(filename)
 	if err != nil {
 		return err

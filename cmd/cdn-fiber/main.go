@@ -12,6 +12,7 @@ const port = 3000
 func main() {
 	app := fiber.New()
 
+  // Set up handlers
 	handlers.SetupHandlers(app)
 
 	// Start the server

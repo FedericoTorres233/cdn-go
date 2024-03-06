@@ -14,15 +14,16 @@ import (
 const uploadDir = "./public/uploads/"
 
 func uploadHandler(c fiber.Ctx) error {
-	// Parse the form data, including files
-	form, err := c.MultipartForm()
-	if err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
-	}
 
 	// Create the uploads directory if it doesn't exist
 	if err := os.MkdirAll(uploadDir, os.ModePerm); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	// Parse the form data, including files
+	form, err := c.MultipartForm()
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
 	}
 
 	// Iterate through uploaded files
@@ -34,8 +35,6 @@ func uploadHandler(c fiber.Ctx) error {
 		log.Println("Error parsing JSON:", err1)
 		return err1
 	}
-	log.Println(metadata)
-	log.Println(form)
 
 	// Generate UUID
 	uuid := utils.CreateUUID() + filepath.Ext(file.Filename)

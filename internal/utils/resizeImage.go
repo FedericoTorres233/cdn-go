@@ -8,11 +8,13 @@ import (
 	"path/filepath"
 )
 
+// Resize Image resizes an image (filename) to an specified scale and tags it
 func ResizeImage(filename string, tag string, scale int) error {
 
 	// Extract the file extension
 	ext := filepath.Ext(filename)
 
+  // Check if image does not need to be resized
 	if scale == 0 {
 		return nil
 	}
