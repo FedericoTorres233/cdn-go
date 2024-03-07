@@ -9,5 +9,5 @@ func SetupHandlers(app *fiber.App) {
 	app.Post("/upload", uploadHandler)
 
 	// Serve uploaded images
-	app.Get("/image/:dir/:filename", getImageHandler)
+	app.Get("/public/uploads/:dir/:filename", getImageHandler)
 }
