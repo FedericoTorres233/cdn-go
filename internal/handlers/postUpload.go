@@ -39,6 +39,9 @@ func uploadHandler(c fiber.Ctx) error {
 	// Generate UUID
 	uuid := utils.CreateUUID() + filepath.Ext(file.Filename)
 
+	// Create UUID slice with an initial value
+	var uuids []string
+
 	// Generate a unique filename
 	filename := filepath.Join(uploadDir+"/"+metadata.Dir, uuid)
 
@@ -53,16 +56,23 @@ func uploadHandler(c fiber.Ctx) error {
 	}
 
 	// Resize original image
-	if err := utils.ResizeImage(filename, "", metadata.Size); err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
-	}
+  image_path, err := utils.ResizeImage(filename, "", metadata.Size)
+  uuids = append(uuids, image_path)
+	if err != nil {
+    return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+  }
 
 	// Resize image more scales
 	for tag, size := range metadata.Scales {
-		if err := utils.ResizeImage(filename, tag, size); err != nil {
+		image_path, err := utils.ResizeImage(filename, tag, size)
+		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+		}
+
+		if image_path != "" {
+			uuids = append(uuids, image_path)
 		}
 	}
 
-	return c.JSON(fiber.Map{"message": "Files uploaded successfully", "uuid": uuid})
+	return c.JSON(fiber.Map{"message": "Files uploaded successfully", "uuid": uuids})
 }

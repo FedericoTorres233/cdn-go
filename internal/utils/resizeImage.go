@@ -9,14 +9,14 @@ import (
 )
 
 // Resize Image resizes an image (filename) to an specified scale and tags it
-func ResizeImage(filename string, tag string, scale int) error {
+func ResizeImage(filename string, tag string, scale int) (string, error) {
 
 	// Extract the file extension
 	ext := filepath.Ext(filename)
 
-  // Check if image does not need to be resized
+	// Check if image does not need to be resized
 	if scale == 0 {
-		return nil
+		return "", nil
 	}
 
 	// Generate the output filename without extension
@@ -37,16 +37,16 @@ func ResizeImage(filename string, tag string, scale int) error {
 	// Run the FFmpeg command
 	err := cmd.Run()
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	// Rename file if original
 	if tag == "" {
 		err1 := os.Rename(outFilename, filename)
 		if err1 != nil {
-			return err1
+			return "", err1
 		}
 	}
 
-	return nil
+	return outFilename, nil
 }
